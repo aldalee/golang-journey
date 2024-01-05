@@ -12,6 +12,6 @@ func main() {
 		clientIP := ctx.ClientIP()
 		ctx.String(http.StatusOK, "Client IP: %s", clientIP)
 	})
-	// Start the Gin server and listen on port 8080
+	// start the Gin server and listen on port 8080
 	r.Run(":8080")
 }
