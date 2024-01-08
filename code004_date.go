@@ -2,22 +2,25 @@ package main
 
 import "time"
 
-// 计算两个日期之间差多少天
-func DiffDays(t1, t2 time.Time) int {
-	if t1.IsZero() {
-		t1 = time.Now()
+// GetDaysBetween2Date get the number of days difference between two dates
+func GetDaysBetween2Date(date1, date2 string) (int, error) {
+	d1, err := time.Parse("2006-01-02", date1)
+	if err != nil {
+		return 0, err
 	}
-	
-	t1Unix, _ := t1.Unix()
-	t2Unix, _ := t2.Unix()
-
-	diff := t2Unix - t1Unix
-
-	return int(diff / (24 * 3600))
+	d2, err := time.Parse("2006-01-02", date2)
+	if err != nil {
+		return 0, err
+	}
+	return int(d2.Sub(d1).Hours() / 24), nil
 }
-// 推算几天后的日期
 
-
-func main() {
-
+// GetDateAfterDays get the date in a few days
+func GetDateAfterDays(startDate string, days int) (string, error) {
+	start, err := time.Parse("2006-01-02", startDate)
+	if err != nil {
+		return "", err
+	}
+	newDate := start.AddDate(0, 0, days)
+	return newDate.Format("2006-01-02"), nil
 }
